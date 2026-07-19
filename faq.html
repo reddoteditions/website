@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>red dot editions — FAQ</title>
+  <style>
+    @font-face {
+      font-family: "Karasuma Gothic";
+      src: url("assets/fonts/KarasumaGothic-Regular.woff2") format("woff2");
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: "Karasuma Gothic";
+      src: url("assets/fonts/KarasumaGothic-Medium.woff2") format("woff2");
+      font-weight: 500;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: "Karasuma Gothic";
+      src: url("assets/fonts/KarasumaGothic-Bold.woff2") format("woff2");
+      font-weight: 700;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    :root {
+      --bg: #f0f0f0;
+      --surface: #ffffff;
+      --fg: #d6001a;
+      --muted: color-mix(in srgb, #d6001a 58%, #f0f0f0 42%);
+      --border: color-mix(in srgb, #d6001a 28%, transparent);
+      --accent: #d6001a;
+      --on-accent: #f0f0f0;
+      --font-display: "Karasuma Gothic", "Inter", system-ui, -apple-system, sans-serif;
+      --font-body: "Karasuma Gothic", "Inter", system-ui, -apple-system, sans-serif;
+      --pad: clamp(1.25rem, 4vw, 2.75rem);
+      --max: 68rem;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+      font-family: var(--font-body);
+      font-weight: 500;
+      background: var(--bg);
+      color: var(--fg);
+      line-height: 1.5;
+      min-height: 100vh;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font: inherit;
+      color: inherit;
+      background: none;
+      border: 0;
+      cursor: pointer;
+    }
+
+    /* —— Header —— */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      background: color-mix(in srgb, var(--bg) 92%, transparent);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    .header-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 1.1rem var(--pad) 0.85rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-desktop {
+      display: flex;
+      gap: clamp(1.25rem, 3vw, 2.25rem);
+    }
+
+    .nav-desktop a {
+      font-size: 0.8125rem;
+      letter-spacing: 0.02em;
+      color: var(--fg);
+      transition: opacity 0.2s ease;
+    }
+
+    .nav-desktop a:hover {
+      opacity: 0.55;
+    }
+
+    .brand-mark {
+      font-size: 0.8125rem;
+      letter-spacing: -0.01em;
+      text-transform: none;
+      font-weight: 700;
+      color: var(--fg);
+    }
+
+    .brand-name {
+      font-family: var(--font-display);
+      font-weight: 700;
+      text-transform: none;
+      letter-spacing: -0.02em;
+    }
+
+    .menu-btn {
+      display: none;
+      width: 2.75rem;
+      height: 2.75rem;
+      border-radius: 999px;
+      background: var(--accent);
+      color: var(--on-accent);
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .menu-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 18px color-mix(in srgb, #d6001a 28%, transparent);
+    }
+
+    .menu-btn svg { width: 1.15rem; height: 1.15rem; }
+
+    .nav-mobile {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 50;
+      background: var(--bg);
+      padding: 1.5rem var(--pad);
+      flex-direction: column;
+    }
+
+    .nav-mobile.is-open { display: flex; }
+
+    .nav-mobile-top {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 2.5rem;
+    }
+
+    .nav-mobile a {
+      font-size: clamp(2rem, 10vw, 3.5rem);
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+      padding: 0.55rem 0;
+      border-bottom: 1px solid var(--border);
+      transition: padding-left 0.2s ease, opacity 0.2s ease;
+    }
+
+    .nav-mobile a:hover {
+      padding-left: 0.5rem;
+      opacity: 0.7;
+    }
+
+    /* —— Hero —— */
+    .hero {
+      position: relative;
+      min-height: min(92vh, 52rem);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: clamp(2.5rem, 8vh, 5rem) var(--pad) clamp(3rem, 8vh, 4.5rem);
+      border-bottom: 1px solid var(--border);
+      overflow: hidden;
+    }
+
+    .hero-stage {
+      position: relative;
+      max-width: var(--max);
+      margin: 0 auto;
+      width: 100%;
+      min-height: clamp(22rem, 58vh, 34rem);
+      display: grid;
+      place-items: center;
+      text-align: center;
+    }
+
+    .hero-meta {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .hero-copy {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      max-width: min(52rem, 100%);
+      margin: 0 auto;
+      padding: 0 0.5rem;
+    }
+
+    .hero-title {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: clamp(2.15rem, 7.2vw, 4.5rem);
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      max-width: 16ch;
+      margin: 0;
+      text-transform: none;
+    }
+
+    .hero-founded {
+      margin-top: 0.45rem;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: clamp(2.15rem, 7.2vw, 4.5rem);
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      color: var(--fg);
+      max-width: min(15ch, 100%);
+    }
+
+    .lang-switch {
+      display: inline-flex;
+      align-items: center;
+      gap: 0;
+      margin-top: 1.15rem;
+      font-size: 0.8125rem;
+      letter-spacing: 0.02em;
+      font-weight: 500;
+      z-index: 3;
+      position: relative;
+    }
+    .lang-switch a,
+    .lang-switch span {
+      color: var(--fg);
+      text-decoration: none;
+      padding: 0.1rem 0;
+      min-height: 2.75rem;
+      min-width: 1.6rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .lang-switch a:hover { opacity: 0.55; }
+    .lang-switch .is-active {
+      font-weight: 700;
+      text-decoration: underline;
+      text-underline-offset: 0.18em;
+    }
+    .lang-switch .sep {
+      opacity: 0.4;
+      user-select: none;
+      padding: 0 0.12rem;
+      margin: 0;
+      min-width: 0;
+      min-height: auto;
+    }
+
+    .chip-label {
+      position: static;
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.55rem;
+      margin-top: 1.65rem;
+      font-size: 0.9375rem;
+      letter-spacing: 0.02em;
+      color: var(--fg);
+      text-decoration: none;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+    .chip-label .chip-dot {
+      position: static;
+      width: 1.15rem;
+      height: 1.15rem;
+      border-radius: 999px;
+      background: var(--accent);
+      animation: none;
+      flex-shrink: 0;
+    }
+    .chip-label .chip-text {
+      text-decoration: underline;
+      text-underline-offset: 0.22em;
+    }
+
+    .chip-label:hover {
+      opacity: 0.7;
+      transform: translateY(-2px);
+    }
+
+    /* Floating dots */
+    .dot {
+      position: absolute;
+      width: 2.35rem;
+      height: 2.35rem;
+      border-radius: 999px;
+      background: var(--accent);
+      color: var(--on-accent);
+      z-index: 1;
+      transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.25s ease;
+      animation: float 7s ease-in-out infinite;
+      pointer-events: auto;
+      cursor: default;
+    }
+
+    .dot:hover {
+      transform: scale(1.12);
+      box-shadow: 0 8px 22px color-mix(in srgb, #d6001a 32%, transparent);
+      animation-play-state: paused;
+    }
+
+    .dot-1 { top: 6%; left: 6%; animation-delay: 0s; }
+    .dot-2 { top: 4%; left: 32%; animation-delay: -1.2s; }
+    .dot-3 { top: 2%; left: 55%; animation-delay: -2.4s; }
+    .dot-4 { top: 5%; right: 18%; animation-delay: -0.8s; }
+    .dot-5 { top: 10%; right: 4%; animation-delay: -3.1s; }
+    .dot-6 { top: 38%; left: 3%; animation-delay: -1.7s; }
+    .dot-7 { top: 42%; right: 5%; animation-delay: -2.9s; }
+    .dot-8 { top: 58%; left: 8%; animation-delay: -0.4s; }
+    .dot-9 { top: 62%; right: 14%; animation-delay: -3.6s; }
+    .dot-10 { bottom: 18%; left: 22%; animation-delay: -1.9s; }
+    .dot-11 { bottom: 14%; left: 48%; animation-delay: -2.2s; }
+    .dot-12 { bottom: 16%; right: 22%; animation-delay: -0.6s; }
+    .dot-13 { bottom: 8%; left: 8%; animation-delay: -3.4s; }
+    .dot-14 { bottom: 10%; right: 6%; animation-delay: -1.1s; }
+    .dot-15 { top: 28%; right: 28%; animation-delay: -2.7s; }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-7px); }
+    }
+
+    /* —— Sections —— */
+    .section {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: clamp(2.75rem, 7vw, 4.5rem) var(--pad);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section-grid {
+      display: grid;
+      grid-template-columns: minmax(10rem, 0.9fr) minmax(0, 1.6fr);
+      gap: clamp(1.5rem, 4vw, 3.25rem) clamp(1.5rem, 4vw, 3.5rem);
+      align-items: start;
+    }
+
+    .section-heading {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: clamp(1.35rem, 2.6vw, 1.65rem);
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin: 0;
+      text-transform: lowercase;
+    }
+    .section-heading.is-uppercase,
+    #faq .section-heading {
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .section-body {
+      font-size: clamp(0.9rem, 1.35vw, 1.05rem);
+      line-height: 1.55;
+      letter-spacing: -0.01em;
+      font-weight: 400;
+      max-width: 58ch;
+    }
+
+    .section-body > p:first-child,
+    .section-body > .team-person:first-child,
+    .section-body > .faq-block:first-child,
+    .section-body > ul:first-child,
+    .section-body > .schedule-list:first-child {
+      margin-top: 0;
+    }
+
+    .section-body p + p { margin-top: 0.85rem; }
+    .section-body p + ul,
+    .section-body p + .schedule-list { margin-top: 0.7rem; }
+    .section-body .block-title {
+      font-weight: 700;
+      font-size: 1em;
+      letter-spacing: -0.015em;
+      text-transform: lowercase;
+      margin: 0 0 0.45rem;
+    }
+    .section-body .block-title + p { margin-top: 0; }
+    .section-body p + .block-title {
+      margin-top: 1.85rem;
+    }
+    .section-body strong {
+      font-weight: 700;
+    }
+    .section-lead {
+      margin: 0 0 1.75rem;
+    }
+    .section-body ul {
+      list-style: none;
+      margin: 0.65rem 0 1rem;
+    }
+    .section-body li {
+      padding: 0.2rem 0;
+    }
+    .section-body a {
+      text-decoration: underline;
+      text-underline-offset: 0.15em;
+    }
+    .section-body a:hover { opacity: 0.65; }
+
+        .faq-block + .faq-block { margin-top: 3.25rem; }
+    .faq-cat {
+      font-weight: 700;
+      font-size: clamp(1.35rem, 2.6vw, 1.65rem);
+      margin: 0 0 1rem;
+      letter-spacing: -0.02em;
+      text-transform: lowercase;
+      line-height: 1.15;
+      color: var(--fg);
+    }
+    .faq-item + .faq-item { margin-top: 2.75rem; }
+    .faq-q {
+      font-weight: 700;
+      margin: 0 0 0.25rem;
+      letter-spacing: -0.01em;
+      font-size: 1em;
+      line-height: 1.35;
+      color: var(--fg);
+    }
+    .faq-a {
+      font-weight: 400;
+      color: var(--fg);
+      margin: 0;
+      line-height: 1.55;
+      
+    }
+
+    .schedule-list {
+      list-style: none;
+    }
+    .schedule-list li {
+      padding: 0.65rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .schedule-list li:last-child { border-bottom: 0; }
+    .schedule-list strong {
+      font-weight: 700;
+      display: inline-block;
+      min-width: 6.5rem;
+    }
+
+    .team-person + .team-person { margin-top: 2.25rem; }
+    .team-name {
+      font-weight: 700;
+      font-size: 1.15em;
+      letter-spacing: -0.02em;
+      margin: 0 0 0.9rem;
+    }
+    .team-bio {
+      font-weight: 400;
+      line-height: 1.55;
+      margin: 0;
+    }
+    .team-link {
+      display: inline-block;
+      margin-top: 1rem;
+      font-weight: 500;
+      text-decoration: underline;
+      text-underline-offset: 0.18em;
+      letter-spacing: 0.01em;
+    }
+    .team-link:hover { opacity: 0.65; }
+
+    .cta-band + .cta-band {
+      padding-top: 0;
+      border-top: 0;
+    }
+
+    .cta-band {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: clamp(3rem, 8vw, 5rem) var(--pad);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+    }
+
+    .cta-copy {
+      font-size: clamp(1.35rem, 3vw, 1.85rem);
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      max-width: 22ch;
+      font-weight: 500;
+      text-transform: lowercase;
+      
+    }
+
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      min-height: 2.5rem;
+      padding: 0.55rem 1.1rem 0.55rem 0.55rem;
+      border-radius: 999px;
+      background: var(--accent);
+      color: var(--on-accent);
+      font-size: 0.875rem;
+      letter-spacing: 0.02em;
+      font-weight: 500;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .cta-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 28px color-mix(in srgb, #d6001a 28%, transparent);
+    }
+
+    .cta-btn .cta-dot {
+      width: 1.85rem;
+      height: 1.85rem;
+      border-radius: 999px;
+      background: var(--on-accent);
+      flex-shrink: 0;
+    }
+
+    .site-footer {
+      border-top: 1px solid var(--border);
+      padding: 1.25rem var(--pad) 2rem;
+      max-width: var(--max);
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 0.75rem;
+      font-size: 0.75rem;
+      letter-spacing: 0.04em;
+      color: var(--muted);
+    }
+
+    /* Mobile */
+    @media (min-width: 861px) {
+      .section-grid > .section-heading {
+        padding-top: 0.15rem;
+      }
+    }
+
+    @media (max-width: 860px) {
+      .nav-desktop { display: none; }
+      .menu-btn { display: inline-flex; }
+      .brand-mark { display: none; }
+
+      .hero {
+        min-height: auto;
+        padding-top: 2rem;
+        padding-bottom: 2.5rem;
+      }
+
+      .hero-stage {
+        min-height: clamp(20rem, 70vh, 28rem);
+      }
+      .chip-label {
+        margin-top: 1.5rem;
+      }
+
+      .dot { width: 2rem; height: 2rem; }
+      .dot-4, .dot-5, .dot-7, .dot-9, .dot-12, .dot-14, .dot-15 { display: none; }
+
+      .section-grid {
+        grid-template-columns: 1fr;
+        gap: 1.15rem;
+      }
+
+      .section-heading {
+        margin-bottom: 0.85rem;
+      }
+
+      .section-body {
+        max-width: none;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .dot-2, .dot-8, .dot-11 { display: none; }
+      .hero-title,
+      .hero-founded { max-width: 14ch; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .dot { animation: none; }
+      * { transition: none !important; }
+    }
+  </style>
+  <style>
+    .page-main {
+      padding-top: clamp(1.25rem, 3vw, 2rem);
+    }
+  
+    .header-lang {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.12rem;
+      font-size: 0.75rem;
+      letter-spacing: 0.02em;
+      font-weight: 500;
+      margin-left: 0.5rem;
+    }
+    .header-lang a:hover { opacity: 0.55; }
+    .header-lang .is-active {
+      font-weight: 700;
+      text-decoration: underline;
+      text-underline-offset: 0.18em;
+    }
+    .header-lang .sep { opacity: 0.45; }
+    .brand-row {
+      display: inline-flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.25rem;
+    }
+</style>
+</head>
+<body>
+  <header class="site-header" data-od-id="site-header">
+    <div class="header-inner">
+      <nav class="nav-desktop" data-od-id="nav-desktop" aria-label="Principal">
+        <a href="index.html#edicao">edição #001</a>
+        <a href="https://tally.so/r/QKWYO8" target="_blank" rel="noopener noreferrer">inscreva-se</a>
+        <a href="faq.html">FAQ</a>
+        <a href="quem-somos.html">quem somos</a>
+        <a href="index.html#contato">contato</a>
+      </nav>
+      <div class="brand-row">
+        <a class="brand-mark brand-name" data-od-id="brand-mark" href="index.html">red dot editions</a>
+        <div class="header-lang" data-od-id="lang-switch" role="navigation" aria-label="Idioma">
+          <span class="is-active" aria-current="page">PT</span>
+          <span class="sep" aria-hidden="true">/</span>
+          <a href="faq-en.html" hreflang="en" lang="en">EN</a>
+        </div>
+      </div>
+      <button class="menu-btn" type="button" data-od-id="menu-btn" aria-label="Abrir menu" aria-expanded="false" aria-controls="nav-mobile">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+          <path d="M5 8h14M5 12h14M5 16h14"></path>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <nav id="nav-mobile" class="nav-mobile" data-od-id="nav-mobile" aria-label="Menu móvel" hidden>
+    <div class="nav-mobile-top">
+      <button class="menu-btn" type="button" data-od-id="menu-close" aria-label="Fechar menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+          <path d="M7 7l10 10M17 7L7 17"></path>
+        </svg>
+      </button>
+    </div>
+    <a href="index.html#edicao">edição #001</a>
+    <a href="https://tally.so/r/QKWYO8" target="_blank" rel="noopener noreferrer">inscreva-se</a>
+    <a href="faq.html">FAQ</a>
+    <a href="quem-somos.html">quem somos</a>
+    <a href="index.html#contato">contato</a>
+    <a href="faq-en.html" hreflang="en">English</a>
+    <a href="faq-en.html" hreflang="en">English</a>
+  </nav>
+
+  <main class="page-main" data-od-id="faq-main">
+    <section id="faq" class="section" data-od-id="section-faq">
+      <div class="section-grid">
+        <h2 class="section-heading" data-od-id="faq-heading">FAQ</h2>
+        <div class="section-body" data-od-id="faq-body">
+          <div class="faq-block">
+            <p class="faq-cat">participação</p>
+            <div class="faq-item">
+              <p class="faq-q">O convite é para publicar uma fotografia de minha autoria?</p>
+              <p class="faq-a">Sim. Cada participante publicará uma única fotografia de sua autoria, selecionada em conjunto durante a curadoria.</p>
+            </div>
+            <div class="faq-item">
+              <p class="faq-q">Posso enviar mais de uma fotografia?</p>
+              <p class="faq-a">Sim, para avaliação durante a curadoria. Na publicação, porém, cada participante é representado por uma única imagem.</p>
+            </div>
+          </div>
+
+          <div class="faq-block">
+            <p class="faq-cat">curadoria</p>
+            <div class="faq-item">
+              <p class="faq-q">Como será realizada a seleção da fotografia?</p>
+              <p class="faq-a">Em diálogo entre o participante e a curadoria, considerando a trajetória do autor e a construção editorial da publicação.</p>
+            </div>
+            <div class="faq-item">
+              <p class="faq-q">Quem faz parte da curadoria?</p>
+              <p class="faq-a">A curadoria é conduzida por Ale Ruaro, em diálogo direto com cada participante ao longo do processo de seleção.</p>
+            </div>
+            <div class="faq-item">
+              <p class="faq-q">As fotografias poderão ser recusadas pela curadoria?</p>
+              <p class="faq-a">A curadoria trabalha em diálogo com cada participante. Se a imagem inicialmente proposta não for considerada adequada, outras opções podem ser apresentadas durante o processo. O objetivo é construir o livro em conjunto, não excluir participantes convidados.</p>
+            </div>
+          </div>
+
+          <div class="faq-block">
+            <p class="faq-cat">publicação</p>
+            <div class="faq-item">
+              <p class="faq-q">Como meu trabalho será apresentado no livro?</p>
+              <p class="faq-a">Cada participante é representado(a) por uma única fotografia, acompanhada da identificação de autoria.</p>
+            </div>
+            <div class="faq-item">
+              <p class="faq-q">Minha fotografia ficará ao lado da fotografia de outro(a) participante?</p>
+              <p class="faq-a">Não. Cada fotografia ocupa uma página exclusiva. A página oposta é reservada a elementos editoriais, como a identificação de autoria ou outros conteúdos definidos durante o desenvolvimento do projeto gráfico.</p>
+            </div>
+            <div class="faq-item">
+              <p class="faq-q">Como devo enviar o arquivo?</p>
+              <p class="faq-a">Para a curadoria, em baixa resolução (72 dpi), apenas para visualização. Após a seleção, será solicitado um arquivo em alta resolução (TIFF ou JPEG, em RGB), compatível com impressão. As especificações completas são enviadas após a definição do projeto gráfico; a conversão para CMYK é feita nessa etapa.</p>
+            </div>
+            <div class="faq-item">
+              <p class="faq-q">O formato do livro, o papel e as especificações gráficas já estão definidos?</p>
+              <p class="faq-a">Não. Formato, número de páginas, papel, acabamento e demais especificações são definidos após a conclusão da curadoria, a partir do conjunto de fotografias selecionadas.</p>
+            </div>
+            <div class="faq-item">
+              <p class="faq-q">Haverá aprovação do projeto gráfico ou envio de prova impressa aos(às) participantes?</p>
+              <p class="faq-a">Não. O projeto gráfico é desenvolvido após a curadoria e conduzido de forma centralizada pela direção de arte. Dado o número de participantes, não há aprovação individual nem envio de provas impressas — o que garante consistência editorial e viabiliza o cronograma de produção.</p>
+            </div>
+            <div class="faq-item">
+              <p class="faq-q">Onde o livro será impresso?</p>
+              <p class="faq-a">A impressão será realizada pela&nbsp;Ipsis.</p>
+            </div>
+            <div class="faq-item">
+              <p class="faq-q">Qual será a tiragem?</p>
+              <p class="faq-a">Entre 500 e 1.000 exemplares, conforme a demanda por exemplares adicionais.</p>
+            </div>
+            <div class="faq-item">
+              <p class="faq-q">O livro terá distribuição?</p>
+              <p class="faq-a">Sim. Além da comercialização ao público, exemplares serão destinados a bibliotecas, museus, instituições culturais, curadores, pesquisadores e profissionais da fotografia no Brasil e no exterior.</p>
+            </div>
+            <div class="faq-item">
+              <p class="faq-q">Quando receberei meu exemplar?</p>
+              <p class="faq-a">Após o lançamento e o início da distribuição. O cronograma de envio será comunicado aos participantes ao longo do projeto</p>
+            </div>
+            <div class="faq-item">
+              <p class="faq-q">Esta edição poderá ser reimpressa?</p>
+              <p class="faq-a">Não. É uma edição única. A <span class="brand-name">red dot editions</span> pode desenvolver novas publicações no futuro, com outros temas e participantes</p>
+            </div>
+          </div>
+
+          <div class="faq-block">
+            <p class="faq-cat">investimento</p>
+            <div class="faq-item">
+              <p class="faq-q">O que está incluído no valor da participação?</p>
+              <p class="faq-a">Curadoria, produção editorial, projeto gráfico, preparação dos arquivos para impressão, impressão, distribuição institucional, envios nacionais e internacionais, lançamento da publicação e um exemplar do livro.</p>
+            </div>
+            <div class="faq-item">
+              <p class="faq-q">Haverá algum custo além do valor da participação?</p>
+              <p class="faq-a">Não. O único custo opcional é a compra antecipada de exemplares adicionais.</p>
+            </div>
+            <div class="faq-item">
+              <p class="faq-q">Posso adquirir exemplares adicionais?</p>
+              <p class="faq-a">Sim. Os(as) participantes poderão adquirir exemplares adicionais antecipadamente pelo valor de&nbsp;R$&nbsp;70,00 cada, mediante compra antecipada.</p>
+            </div>
+            <div class="faq-item">
+              <p class="faq-q">Receberei royalties sobre a venda dos livros?</p>
+              <p class="faq-a">Não.&nbsp;A publicação segue modelo cooperativo, sem distribuição de royalties. A receita das vendas sustenta a circulação da publicação e o projeto editorial.</p>
+            </div>
+          </div>
+
+          <div class="faq-block">
+            <p class="faq-cat">direitos autorais</p>
+            <div class="faq-item">
+              <p class="faq-q">Os direitos autorais da fotografia permanecem comigo?</p>
+              <p class="faq-a">Sim, integralmente. A <span class="brand-name">red dot editions</span> recebe apenas a autorização, prevista em contrato, para reproduzir a fotografia na publicação e em materiais de divulgação relacionados ao projeto.</p>
+            </div>
+            <div class="faq-item">
+              <p class="faq-q">Posso utilizar a fotografia publicada em outros projetos ou publicações?</p>
+              <p class="faq-a">Sim. A participação não restringe o uso da imagem em exposições, portfólios, publicações ou projetos futuros.</p>
+            </div>
+            <div class="faq-item">
+              <p class="faq-q">Sou responsável pela autorização de uso de imagem das pessoas retratadas?</p>
+              <p class="faq-a">Sim. Cada participante deve garantir que possui as autorizações necessárias para a publicação da fotografia, quando aplicável.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" data-od-id="site-footer">
+    <span class="brand-name">red dot editions</span>
+    <span>publicações coletivas de fotografia</span>
+  </footer>
+
+  <script>
+    (function () {
+      var openBtn = document.querySelector('[data-od-id="menu-btn"]');
+      var closeBtn = document.querySelector('[data-od-id="menu-close"]');
+      var mobile = document.getElementById("nav-mobile");
+      if (!openBtn || !mobile) return;
+      function setOpen(on) {
+        mobile.classList.toggle("is-open", on);
+        mobile.hidden = !on;
+        openBtn.setAttribute("aria-expanded", on ? "true" : "false");
+        document.body.style.overflow = on ? "hidden" : "";
+      }
+      openBtn.addEventListener("click", function () { setOpen(true); });
+      if (closeBtn) closeBtn.addEventListener("click", function () { setOpen(false); });
+      mobile.querySelectorAll("a").forEach(function (a) {
+        a.addEventListener("click", function () { setOpen(false); });
+      });
+    })();
+  </script>
+</body>
+</html>
