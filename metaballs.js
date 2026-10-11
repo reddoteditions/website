@@ -16,6 +16,7 @@ uniform float u_scale;
 uniform float u_grain;
 uniform float u_seed;
 uniform float u_soft;
+uniform sampler2D u_text;
 float grainHash(vec2 p){vec3 p3=fract(vec3(p.xyx)*0.1031);p3+=dot(p3,p3.yzx+33.33);return fract((p3.x+p3.y)*p3.z);}
 vec3 palette(float x){float n=max(u_scene.w-1.0,1.0);float f=clamp(x,0.0,1.0)*n;vec3 col=u_colors[0];
 for(int i=0;i<3;i++){if(float(i)<n)col=mix(col,u_colors[i+1],smoothstep(0.0,1.0,clamp(f-float(i),0.0,1.0)));}return col;}
@@ -32,7 +33,8 @@ void main(){
   float s=smoothstep(th-w,th+w,field);
   float gn=grainHash(gl_FragCoord.xy+vec2(u_seed*17.0,u_seed*31.0))-0.5;
   s=clamp(s+gn*u_grain,0.0,1.0);
-  vec3 col=palette(s);
+  float ta=texture2D(u_text,vec2(gl_FragCoord.x/u_scene.x,1.0-gl_FragCoord.y/u_scene.y)).a;
+  vec3 col=mix(palette(s),palette(1.0-s),ta);
   gl_FragColor=vec4(clamp(col,0.0,1.0),1.0);
 }`;
 const hex = h => [1,3,5].map(i => parseInt(h.slice(i, i + 2), 16) / 255);
@@ -46,6 +48,7 @@ class RdeMetaballs extends HTMLElement {
     this.appendChild(c);
     const gl = c.getContext("webgl", { antialias: false, premultipliedAlpha: false });
     if (!gl) return;
+    this._gl = gl;
     gl.getExtension("OES_standard_derivatives");
     const sh = (t, s) => { const o = gl.createShader(t); gl.shaderSource(o, s); gl.compileShader(o); return o; };
     const pr = gl.createProgram();
@@ -87,6 +90,51 @@ class RdeMetaballs extends HTMLElement {
       else last = null;
     };
     const go = () => { if (!raf) raf = requestAnimationFrame(frame); };
+    // hero text drawn into the shader: inverts exactly against the blobs (no CSS blend modes, works in Safari)
+    const tex = gl.createTexture();
+    gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, tex);
+    [gl.TEXTURE_WRAP_S, gl.TEXTURE_WRAP_T].forEach(p => gl.texParameteri(gl.TEXTURE_2D, p, gl.CLAMP_TO_EDGE));
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 1, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE, new Uint8Array(4));
+    gl.uniform1i(U("u_text"), 0);
+    const tc = document.createElement("canvas"), tx = tc.getContext("2d");
+    const glyphs = () => { const sc = this.closest("section") || this.parentElement; return sc ? [...sc.querySelectorAll("[data-glyph]")] : []; };
+    const paint = () => {
+      size();
+      const cr = c.getBoundingClientRect(); if (!cr.width || !cr.height) return;
+      tc.width = c.width; tc.height = c.height;
+      const s = c.width / cr.width;
+      tx.clearRect(0, 0, tc.width, tc.height); tx.fillStyle = "#fff"; tx.textBaseline = "alphabetic";
+      const els = glyphs();
+      els.forEach(el => {
+        const cs = getComputedStyle(el), fs = parseFloat(cs.fontSize);
+        tx.font = `${cs.fontStyle} ${cs.fontWeight} ${fs * s}px ${cs.fontFamily}`;
+        const ls = parseFloat(cs.letterSpacing) || 0, perChar = ls !== 0 && !("letterSpacing" in tx);
+        if ("letterSpacing" in tx) tx.letterSpacing = ls * s + "px";
+        const asc = tx.measureText("H").fontBoundingBoxAscent;
+        const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
+        for (let n; (n = walker.nextNode());) {
+          const str = n.data, re = perChar ? /\S/g : /\S+/g;
+          for (let m; (m = re.exec(str));) {
+            const rg = document.createRange(); rg.setStart(n, m.index); rg.setEnd(n, m.index + m[0].length);
+            const r = rg.getClientRects()[0]; if (!r) continue;
+            tx.fillText(m[0], (r.left - cr.left) * s, (r.top - cr.top) * s + asc);
+          }
+        }
+      });
+      if ("letterSpacing" in tx) tx.letterSpacing = "0px";
+      gl.bindTexture(gl.TEXTURE_2D, tex);
+      gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, tc);
+      els.forEach(el => { el.style.color = "transparent"; });
+      last = null; if (!raf) frame(performance.now());
+    };
+    const repaint = () => { clearTimeout(this._pt); this._pt = setTimeout(paint, 60); };
+    this._tro = new ResizeObserver(repaint);
+    const watch = () => { this._tro.observe(c); glyphs().forEach(el => this._tro.observe(el)); repaint(); };
+    this._tmo = new MutationObserver(repaint);
+    requestAnimationFrame(() => { watch(); glyphs().forEach(el => this._tmo.observe(el, { attributes: true, attributeFilter: ["style"] })); });
+    (document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve()).then(repaint);
+    setTimeout(repaint, 600); setTimeout(repaint, 1500);
     this._ro = new ResizeObserver(go); this._ro.observe(c);
     this._io = new IntersectionObserver(([e]) => { inView = e.isIntersecting; if (inView) go(); }); this._io.observe(c);
     this._vis = () => document.visibilityState === "visible" && go();
@@ -94,7 +142,7 @@ class RdeMetaballs extends HTMLElement {
     go();
   }
   disconnectedCallback() {
-    this._ro && this._ro.disconnect(); this._io && this._io.disconnect();
+    this._ro && this._ro.disconnect(); this._io && this._io.disconnect(); this._tro && this._tro.disconnect(); this._tmo && this._tmo.disconnect();
     this._vis && document.removeEventListener("visibilitychange", this._vis);
   }
 }
