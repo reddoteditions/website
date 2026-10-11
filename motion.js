@@ -69,6 +69,77 @@
   new MutationObserver(() => { clearTimeout(fit.t); fit.t = setTimeout(fit, 80); }).observe(document.documentElement, { childList: true, subtree: true });
   setTimeout(fit, 300);
 
+
+
+  // mobile menu: fixed inverted bar + full-screen red overlay (below 1000px; side nav hidden)
+  const buildMobileMenu = () => {
+    const src = document.querySelector("nav[data-sidenav]");
+    if (!src || document.querySelector("[data-mnav]")) return;
+    const st = document.createElement("style");
+    st.textContent = "@media (max-width:999px){[data-sidenav]{display:none!important}}@media (min-width:1000px){[data-mnav]{display:none!important}}[data-mnav-sheet] a:focus-visible,[data-mnav] button:focus-visible{outline:1px solid currentColor;outline-offset:4px}";
+    document.head.appendChild(st);
+    const pad = "clamp(1.25rem,3vw,2.4rem)";
+    const font = "font-family:'Karasuma Gothic',system-ui,sans-serif;font-size:.9375rem;line-height:1.55";
+    const links = [...src.querySelectorAll("a")];
+    const home = links[0];
+    const bar = (layer) => {
+      const b = document.createElement("div");
+      b.setAttribute("data-mnav", "");
+      if (layer === "base") b.setAttribute("aria-hidden", "true");
+      b.style.cssText = `position:fixed;top:0;left:0;right:0;z-index:40;display:flex;justify-content:space-between;align-items:center;min-height:2.75rem;padding:.45rem ${pad};${font};line-height:1.4;background:#d6001a;color:#ffffff`;
+      const l = document.createElement(layer === "base" ? "span" : "a");
+      l.textContent = "red dot editions"; l.style.cssText = "font-weight:700;white-space:nowrap";
+      if (layer !== "base") l.href = home.getAttribute("href");
+      const m = document.createElement(layer === "base" ? "span" : "button");
+      m.textContent = "menu"; m.style.cssText = "font:inherit;font-weight:500;color:inherit;background:none;border:0;padding:.5rem 0 .5rem 1rem;margin:-.5rem 0;cursor:pointer";
+      if (layer !== "base") { m.type = "button"; m.setAttribute("aria-expanded", "false"); m.setAttribute("aria-controls", "rde-mnav-sheet"); m.addEventListener("click", () => open(true)); }
+      b.append(l, m); return b;
+    };
+    const top = bar("top");
+    const sheet = document.createElement("div");
+    sheet.id = "rde-mnav-sheet"; sheet.setAttribute("data-mnav", ""); sheet.setAttribute("data-mnav-sheet", "");
+    sheet.setAttribute("role", "dialog"); sheet.setAttribute("aria-modal", "true"); sheet.setAttribute("aria-label", "Menu");
+    sheet.style.cssText = `position:fixed;inset:0;z-index:2147483500;background:#d6001a;color:#ffffff;display:flex;flex-direction:column;padding:0 ${pad} ${pad};${font};transform:translateY(-100%);visibility:hidden;transition:transform .6s cubic-bezier(.76,0,.24,1),visibility 0s linear .6s`;
+    const head = document.createElement("div");
+    head.style.cssText = "display:flex;justify-content:space-between;align-items:center;min-height:2.75rem;padding:.45rem 0;line-height:1.4";
+    const hl = document.createElement("a"); hl.textContent = "red dot editions"; hl.href = home.getAttribute("href"); hl.style.cssText = "font-weight:700;white-space:nowrap;color:inherit";
+    const close = document.createElement("button"); close.type = "button"; close.textContent = "fechar";
+    close.style.cssText = "font:inherit;font-weight:500;color:inherit;background:none;border:0;padding:.5rem 0 .5rem 1rem;margin:-.5rem 0;cursor:pointer";
+    close.addEventListener("click", () => open(false));
+    head.append(hl, close);
+    const list = document.createElement("nav"); list.setAttribute("aria-label", "Principal");
+    list.style.cssText = "margin-top:auto;display:flex;flex-direction:column;gap:.35rem;padding-bottom:1rem";
+    links.slice(1).forEach(a => {
+      const x = document.createElement("a");
+      x.href = a.getAttribute("href"); x.textContent = a.textContent.trim();
+      const k = a.getAttribute("data-nav-key"); if (k) x.setAttribute("data-mnav-key", k);
+      x.style.cssText = "font-family:Lastik,Georgia,serif;font-weight:400;font-size:clamp(2.6rem,10.5vw,4rem);line-height:1.1;letter-spacing:-.02em;color:inherit;text-decoration-thickness:1px;text-underline-offset:.12em;align-self:flex-start";
+      x.addEventListener("click", () => open(false));
+      list.appendChild(x);
+    });
+    sheet.append(head, list);
+    let isOpen = false;
+    const open = (v) => {
+      isOpen = v;
+      sheet.style.transition = v ? "transform .6s cubic-bezier(.76,0,.24,1),visibility 0s" : "transform .6s cubic-bezier(.76,0,.24,1),visibility 0s linear .6s";
+      sheet.style.visibility = v ? "visible" : "hidden";
+      sheet.style.transform = v ? "translateY(0)" : "translateY(-100%)";
+      root.style.overflow = v ? "hidden" : "";
+      const btn = top.querySelector("button"); btn.setAttribute("aria-expanded", String(v));
+      if (v) {
+        const act = document.querySelector("nav[data-sidenav] [aria-current]");
+        const key = act && act.getAttribute("data-nav-key");
+        list.querySelectorAll("a").forEach(a => a.style.textDecorationLine = a.getAttribute("data-mnav-key") === key ? "underline" : "none");
+        setTimeout(() => close.focus(), 50);
+      } else if (document.activeElement && sheet.contains(document.activeElement)) btn.focus();
+    };
+    addEventListener("keydown", e => { if (isOpen && e.key === "Escape") open(false); });
+    addEventListener("resize", () => { if (isOpen && innerWidth >= 1000) open(false); });
+    document.body.append(top, sheet);
+  };
+  document.body ? buildMobileMenu() : addEventListener("DOMContentLoaded", buildMobileMenu);
+  setTimeout(buildMobileMenu, 800);
+
   if (still) return;
 
   // masked text + drawn rules
