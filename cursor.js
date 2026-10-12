@@ -30,7 +30,9 @@
     a.style.transform = b.style.transform = t;
     a.style.opacity = b.style.opacity = "1";
     size(!!(e.target.closest && e.target.closest("a,button,[role=button],label,summary,iframe")));
-    const solid = !!(e.target.closest && e.target.closest("[data-cursor-solid]"));
+    const rad = (big ? 30 : 18) + 4, x = e.clientX, y = e.clientY;
+    let solid = false;
+    document.querySelectorAll("[data-cursor-solid]").forEach(el => { const r = el.getBoundingClientRect(); if (r.width && x > r.left - rad && x < r.right + rad && y > r.top - rad && y < r.bottom + rad) solid = true; });
     a.style.visibility = solid ? "hidden" : "visible";
     b.style.mixBlendMode = solid || !blendOK ? "normal" : "plus-lighter";
   }, { passive: true });

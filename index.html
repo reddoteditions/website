@@ -14,11 +14,11 @@
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="/favicon.ico?v=4" sizes="32x32">
-<link rel="icon" href="/assets/favicon-32.png?v=4" type="image/png" sizes="32x32">
-<link rel="icon" href="/favicon.svg?v=4" type="image/svg+xml">
-<link rel="manifest" href="/site.webmanifest?v=4">
-<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png?v=4">
+<link rel="icon" href="/favicon.ico?v=5" sizes="32x32">
+<link rel="icon" href="/assets/favicon-32.png?v=5" type="image/png" sizes="32x32">
+<link rel="icon" href="/favicon.svg?v=5" type="image/svg+xml">
+<link rel="manifest" href="/site.webmanifest?v=5">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png?v=5">
 <link rel="canonical" href="https://reddoteditions.com.br/">
 <meta property="og:locale" content="pt_BR">
 <meta property="og:site_name" content="red dot editions">
@@ -52,7 +52,6 @@ a:focus-visible{outline:1px solid currentColor;outline-offset:4px}
 @supports not (mix-blend-mode:plus-lighter){[data-blend="base"]{color:transparent!important;mix-blend-mode:normal!important}[data-blend="top"]{mix-blend-mode:normal!important}}
 @keyframes rde-pulse{0%{transform:scale(1);opacity:.55}100%{transform:scale(2.6);opacity:0}}
 @media (prefers-reduced-motion:reduce){[data-presale] span span:first-child{animation:none!important}}
-@media (max-width:999px){[data-hero-tag]{top:calc(2.75rem + 1.25rem)!important;left:0!important;right:0!important;max-width:none!important;padding:0 clamp(1.25rem,3vw,2.4rem)!important;text-align:left!important}[data-hero-tag] p{font-size:clamp(1.75rem,8vw,2.25rem)!important}}
 @media (max-width:899px){[data-ed-grid]{grid-template-columns:minmax(0,1fr)!important;grid-template-areas:"t" "b" "p"!important}[data-ed-grid] figure{max-width:20rem!important;justify-self:start!important}}
 html.rde-pt-in body::after{content:"";position:fixed;inset:0;background:#d6001a;z-index:2147483599}
 .rde-motion [data-mask]>span{transform:translateY(105%);transition:transform 1.1s cubic-bezier(.22,1,.36,1) var(--d,0ms)}
@@ -61,6 +60,7 @@ html.rde-pt-in body::after{content:"";position:fixed;inset:0;background:#d6001a;
 .rde-motion [data-rule].is-in{transform:none}
 @keyframes rde-marquee{from{transform:translate3d(0,0,0)}to{transform:translate3d(-50%,0,0)}}
 [data-marquee]{animation:rde-marquee 38s linear infinite}
+@media (max-width:999px){[data-hero-tag]{top:calc(2.75rem + 1rem)!important}}
 @media (max-width:999px){html{scroll-padding-top:2.75rem}}
 @media (prefers-reduced-motion:reduce){[data-marquee]{animation:none}}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}[data-reveal].is-hidden{opacity:1;transform:none}}
@@ -83,9 +83,7 @@ html.rde-pt-in body::after{content:"";position:fixed;inset:0;background:#d6001a;
 <main id="topo">
   <section data-screen-label="Abertura" data-tone="light" style="position:relative;width:100%;height:100svh;min-height:34rem;background:#ffffff;overflow:hidden;z-index:0;color:#d6001a">
     <x-import component-from-global-scope="rde-metaballs" from="metaballs.js" colors="#ffffff,#d6001a" grain="0" speed="0.3" aria-hidden="true" style="position:absolute;top:0;left:0;right:0;bottom:0;z-index:0" hint-size="100%,100%"></x-import>
-    <div data-hero-tag="" style="position:absolute;top:0;right:0;padding:calc(clamp(1.25rem,3vw,2.4rem) + 2rem) clamp(1.25rem,3vw,2.4rem) 0;max-width:min(40rem,calc(100% - 10.5rem));text-align:right">
-      <p style="position:relative;font-family:Lastik,Georgia,serif;font-weight:400;font-size:clamp(2.25rem,5vw,4rem);line-height:1;letter-spacing:0;font-variant-ligatures:common-ligatures;text-wrap:balance"><span data-glyph="" style="display:block;color:#d6001a"><span style="display:block;white-space:nowrap">Publicações coletivas</span><span style="display:block;white-space:nowrap">de fotografia</span></span></p>
-    </div>
+    <p data-hero-tag="" data-glyph="" style="position:absolute;z-index:1;top:clamp(1.25rem,3vw,2.4rem);right:clamp(1.25rem,3vw,2.4rem);margin:0;font-family:'Karasuma Gothic',system-ui,sans-serif;font-size:.6917rem;font-weight:700;line-height:1.453rem;letter-spacing:.05em;white-space:nowrap;color:#d6001a">PUBLICAÇÕES COLETIVAS DE&nbsp;FOTOGRAFIA</p>
     <div style="position:absolute;bottom:0;left:0;width:100%;padding:clamp(1.25rem,3vw,2.4rem)">
       <h1 style="margin:0;position:relative"><span data-fit="" data-glyph="" style="display:block;width:max-content;font-size:13.5vw;font-family:'Karasuma Gothic',system-ui,sans-serif;font-weight:700;line-height:.8;letter-spacing:-.045em;font-kerning:normal;font-feature-settings:'kern' 1;white-space:nowrap;color:#d6001a;padding-bottom:.04em">red dot editions</span></h1>
     </div>
@@ -170,13 +168,13 @@ html.rde-pt-in body::after{content:"";position:fixed;inset:0;background:#d6001a;
             <p style="font-size:.9375rem;line-height:1.55;font-weight:500"><span style="white-space:nowrap">{{ ev.weekday }},</span> <span style="white-space:nowrap">{{ ev.timeLabel }}</span></p>
             <p style="margin-top:.85rem;font-variant-numeric:tabular-nums;font-family:Lastik,Georgia,serif;font-weight:400;font-size:clamp(3rem,5vw,4.5rem);line-height:.85;letter-spacing:-.04em">{{ ev.date }}</p>
             <p style="margin-top:1rem;font-size:clamp(1rem,1.3vw,1.1875rem);line-height:1.2;font-weight:500;text-wrap:balance">{{ ev.city }}</p>
-            <div style="margin-top:1.5rem;font-size:.895rem;line-height:1.55;font-weight:500">
+            <div style="margin-top:1.5rem;font-size:.9375rem;line-height:1.55;font-weight:500">
               <p style="font-weight:700">{{ ev.venue }}</p>
               <sc-if value="{{ ev.venue2 }}" hint-placeholder-val="{{ false }}"><p style="font-weight:700">{{ ev.venue2 }}</p></sc-if>
               <p style="font-weight:400">{{ ev.a1 }}</p><p style="font-weight:400">{{ ev.a2 }}</p><sc-if value="{{ ev.a3 }}" hint-placeholder-val="{{ true }}"><p style="font-weight:400">{{ ev.a3 }}</p></sc-if>
               <a href="{{ ev.mapUrl }}" target="_blank" rel="noopener noreferrer" aria-label="ver {{ ev.venue }} no mapa" style="display:inline-block;margin-top:.35rem;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.25em">ver no mapa</a>
             </div>
-            <a href="{{ ev.igUrl }}" target="_blank" rel="noopener noreferrer" style="margin-top:auto;padding-top:1.5rem;font-size:.895rem;line-height:1.55;font-weight:500;align-self:flex-start;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.25em">{{ ev.ig }}</a>
+            <a href="{{ ev.igUrl }}" target="_blank" rel="noopener noreferrer" style="margin-top:auto;padding-top:1.5rem;font-size:.9375rem;line-height:1.55;font-weight:500;align-self:flex-start;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.25em">{{ ev.ig }}</a>
           </article>
         </sc-for>
       </div>
