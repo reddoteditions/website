@@ -60,7 +60,7 @@ html.rde-pt-in body::after{content:"";position:fixed;inset:0;background:#d6001a;
 .rde-motion [data-rule].is-in{transform:none}
 @keyframes rde-marquee{from{transform:translate3d(0,0,0)}to{transform:translate3d(-50%,0,0)}}
 [data-marquee]{animation:rde-marquee 38s linear infinite}
-@media (max-width:999px){[data-hero-tag]{top:calc(2.75rem + 1rem)!important}}
+@media (max-width:999px){[data-hero-tag]{top:calc(2.75rem + 1rem)!important;right:auto!important;left:clamp(1.25rem,3vw,2.4rem)!important}}
 @media (max-width:999px){html{scroll-padding-top:2.75rem}}
 @media (prefers-reduced-motion:reduce){[data-marquee]{animation:none}}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}[data-reveal].is-hidden{opacity:1;transform:none}}
@@ -83,7 +83,7 @@ html.rde-pt-in body::after{content:"";position:fixed;inset:0;background:#d6001a;
 <main id="topo">
   <section data-screen-label="Abertura" data-tone="light" style="position:relative;width:100%;height:100svh;min-height:34rem;background:#ffffff;overflow:hidden;z-index:0;color:#d6001a">
     <x-import component-from-global-scope="rde-metaballs" from="metaballs.js" colors="#ffffff,#d6001a" grain="0" speed="0.3" aria-hidden="true" style="position:absolute;top:0;left:0;right:0;bottom:0;z-index:0" hint-size="100%,100%"></x-import>
-    <p data-hero-tag="" data-glyph="" style="position:absolute;z-index:1;top:clamp(1.25rem,3vw,2.4rem);right:clamp(1.25rem,3vw,2.4rem);margin:0;font-family:'Karasuma Gothic',system-ui,sans-serif;font-size:.6917rem;font-weight:700;line-height:1.453rem;letter-spacing:.05em;white-space:nowrap;color:#d6001a">PUBLICAÇÕES COLETIVAS DE&nbsp;FOTOGRAFIA</p>
+    <p data-hero-tag="" data-glyph="" style="position:absolute;z-index:1;top:clamp(1.25rem,3vw,2.4rem);right:clamp(1.25rem,3vw,2.4rem);margin:0;font-family:'Karasuma Gothic',system-ui,sans-serif;font-size:.9375rem;font-weight:700;line-height:1.55;letter-spacing:0;white-space:nowrap;color:#d6001a">publicações coletivas de&nbsp;fotografia</p>
     <div style="position:absolute;bottom:0;left:0;width:100%;padding:clamp(1.25rem,3vw,2.4rem)">
       <h1 style="margin:0;position:relative"><span data-fit="" data-glyph="" style="display:block;width:max-content;font-size:13.5vw;font-family:'Karasuma Gothic',system-ui,sans-serif;font-weight:700;line-height:.8;letter-spacing:-.045em;font-kerning:normal;font-feature-settings:'kern' 1;white-space:nowrap;color:#d6001a;padding-bottom:.04em">red dot editions</span></h1>
     </div>
