@@ -8,14 +8,17 @@
 <meta name="theme-color" content="#ffffff">
 <meta property="og:title" content="red dot editions">
 <meta property="og:description" content="Adquira retratos, edição #001 da red dot editions.">
+<meta property="og:type" content="website">
 <meta property="og:url" content="https://reddoteditions.com.br/adquirir/">
-<meta property="og:image" content="https://reddoteditions.com.br/assets/og-image.jpg">
+<meta property="og:image" content="https://reddoteditions.com.br/assets/og-image.jpg?v=2">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="/favicon.ico?v=3" sizes="32x32">
-<link rel="icon" href="/assets/favicon-32.png?v=3" type="image/png" sizes="32x32">
-<link rel="icon" href="/favicon.svg?v=3" type="image/svg+xml">
-<link rel="manifest" href="/site.webmanifest?v=3">
-<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png?v=3">
+<link rel="icon" href="/favicon.ico?v=4" sizes="32x32">
+<link rel="icon" href="/assets/favicon-32.png?v=4" type="image/png" sizes="32x32">
+<link rel="icon" href="/favicon.svg?v=4" type="image/svg+xml">
+<link rel="manifest" href="/site.webmanifest?v=4">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png?v=4">
 <link rel="canonical" href="https://reddoteditions.com.br/adquirir/">
 <meta property="og:locale" content="pt_BR">
 <meta property="og:site_name" content="red dot editions">
@@ -47,6 +50,8 @@ a:focus-visible{outline:1px solid currentColor;outline-offset:4px}
 html.rde-pt-in body::after{content:"";position:fixed;inset:0;background:#d6001a;z-index:2147483599}
 @keyframes rde-marquee{from{transform:translate3d(0,0,0)}to{transform:translate3d(-50%,0,0)}}
 [data-marquee]{animation:rde-marquee 38s linear infinite}
+@media (max-width:999px){[data-buy]{padding-top:calc(2.75rem + clamp(2rem,6vw,3rem))!important}}
+@media (max-width:799px){[data-buy]{grid-template-columns:minmax(0,1fr)!important;grid-template-areas:"tag" "book" "list"!important}[data-buy-list]{margin-top:1.5rem}}
 @media (prefers-reduced-motion:reduce){[data-marquee]{animation:none}}
 </style>
 </helmet>
@@ -69,17 +74,19 @@ html.rde-pt-in body::after{content:"";position:fixed;inset:0;background:#d6001a;
 
 <main>
   
-  <section data-screen-label="Adquirir" style="min-height:100svh;padding:max(clamp(4rem,9vw,7rem), calc(clamp(1.25rem,3vw,2.4rem) + 9.5rem)) max(clamp(1.25rem,3vw,2.4rem),clamp(1.25rem,calc((100vw - 999px) * 100),max(13rem,calc((100vw - 1200px) / 2))));padding-left:max(clamp(1.25rem,3vw,2.4rem),clamp(1.25rem,calc((100vw - 999px) * 100),calc(max(13rem,calc((100vw - 1200px) / 2)) - 1.75rem)));display:flex;flex-wrap:wrap;align-items:flex-start;gap:3rem clamp(3rem,7vw,6rem)">
-    <div style="flex:1 1 16rem;max-width:22rem;display:flex;flex-direction:column;gap:1.5rem">
-      <div><p data-presale="" style="display:inline-flex;align-items:center;gap:.6rem;padding:.4rem .9rem .4rem .75rem;border:1px solid #d6001a;border-radius:999px;font-size:.875rem;font-weight:500;line-height:1.3;white-space:nowrap"><span aria-hidden="true" style="position:relative;display:inline-block;width:.5rem;height:.5rem;flex-shrink:0"><span style="position:absolute;inset:0;border-radius:50%;background:#d6001a;animation:rde-pulse 1.8s cubic-bezier(.2,.7,.2,1) infinite"></span><span style="position:absolute;inset:0;border-radius:50%;background:#d6001a"></span></span><span>pré-venda, <span style="font-weight:700">envios a partir de 1.11</span></span></p></div>
-      <img src="../assets/livro-retratos-capa.webp" srcset="../assets/livro-retratos-capa-480.webp 480w, ../assets/livro-retratos-capa.webp 860w" sizes="256px" fetchpriority="high" width="860" height="1122" decoding="async" alt="Livro retratos, edição #001" style="display:block;width:100%;max-width:16rem;height:auto;aspect-ratio:860 / 1122">
-      <div style="display:flex;flex-direction:column;gap:.35rem">
-        <h1 style="font-size:.9375rem;font-weight:700;line-height:1.5">retratos, edição #001</h1>
+  <section data-screen-label="Adquirir" data-buy="" style="min-height:100svh;padding:max(clamp(4rem,9vw,7rem), calc(clamp(1.25rem,3vw,2.4rem) + 11.5rem)) max(clamp(1.25rem,3vw,2.4rem),clamp(1.25rem,calc((100vw - 999px) * 100),max(13rem,calc((100vw - 1200px) / 2))));padding-left:max(clamp(1.25rem,3vw,2.4rem),clamp(1.25rem,calc((100vw - 999px) * 100),calc(max(13rem,calc((100vw - 1200px) / 2)) - 1.75rem)));display:grid;grid-template-columns:minmax(0,22rem) minmax(0,1fr);grid-template-areas:'tag .' 'book list';align-content:start;gap:1.5rem clamp(3rem,7vw,6rem)">
+    <div style="grid-area:tag"><p data-presale="" style="display:inline-flex;align-items:center;gap:.6rem;padding:.4rem .9rem .4rem .75rem;border:1px solid #d6001a;border-radius:999px;font-size:.875rem;font-weight:500;line-height:1.3;white-space:nowrap"><span aria-hidden="true" style="position:relative;display:inline-block;width:.5rem;height:.5rem;flex-shrink:0"><span style="position:absolute;inset:0;border-radius:50%;background:#d6001a;animation:rde-pulse 1.8s cubic-bezier(.2,.7,.2,1) infinite"></span><span style="position:absolute;inset:0;border-radius:50%;background:#d6001a"></span></span><span>pré-venda, <span style="font-weight:700">envios a partir de 1.11</span></span></p></div>
+    <div style="grid-area:book;display:flex;flex-direction:column;gap:1.5rem">
+      <img data-cursor-solid="" src="../assets/livro-retratos-capa.webp" srcset="../assets/livro-retratos-capa-480.webp 480w, ../assets/livro-retratos-capa.webp 860w" sizes="256px" fetchpriority="high" width="860" height="1122" decoding="async" alt="Livro retratos, edição #001" style="display:block;width:100%;max-width:16rem;height:auto;aspect-ratio:860 / 1122">
+      <div style="display:flex;flex-direction:column;gap:0;line-height:1.35">
+        <h1 style="font-size:.9375rem;font-weight:700;line-height:1.35">retratos, edição #001</h1>
         <p style="font-size:.9375rem">capa dura, 192&nbsp;páginas, 15&nbsp;×&nbsp;20&nbsp;cm</p>
+        <p style="margin-top:.75rem;font-size:.9375rem;font-weight:700">R$&nbsp;120</p>
+        <p style="margin-top:.5rem;font-size:.8125rem;line-height:1.5;text-wrap:pretty">*Limite de 3 exemplares por pedido; para mais,<br>escreva para <a href="mailto:contato%40reddoteditions.com.br" style="text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.25em">contato@reddoteditions.com.br</a></p>
       </div>
     </div>
 
-    <div style="flex:2 1 28rem;min-width:0">
+    <div data-buy-list="" style="grid-area:list;min-width:0">
 
       <div style="border-bottom:1px solid #d6001a">
         <sc-for list="{{ regions }}" as="r" hint-placeholder-count="4">
@@ -87,6 +94,7 @@ html.rde-pt-in body::after{content:"";position:fixed;inset:0;background:#d6001a;
             <span style="flex:1 1 14rem;min-width:0;display:flex;flex-direction:column;gap:.1rem">
               <span style="font-size:.9375rem;font-weight:500">{{ r.kind }}</span>
               <span style="font-family:Lastik,Georgia,serif;font-size:clamp(1.375rem,2.2vw,1.875rem);line-height:1.1;letter-spacing:-.015em;text-wrap:balance">{{ r.name }}</span>
+              <span style="margin-top:.2rem;font-size:.9375rem;font-weight:400;white-space:nowrap">{{ r.ship }}</span>
             </span>
             <span style="flex:0 0 auto;font-size:.9375rem;font-weight:500;white-space:nowrap;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.25em">comprar</span>
           </a>
@@ -96,10 +104,10 @@ html.rde-pt-in body::after{content:"";position:fixed;inset:0;background:#d6001a;
   </section>
 </main>
 
-<footer data-tone="red" style="background:#d6001a;color:#ffffff;padding:clamp(.3rem,.6vw,.45rem) max(clamp(1.25rem,3vw,2.4rem),clamp(1.25rem,calc((100vw - 999px) * 100),max(13rem,calc((100vw - 1200px) / 2))));padding-left:max(clamp(1.25rem,3vw,2.4rem),clamp(1.25rem,calc((100vw - 999px) * 100),calc(max(13rem,calc((100vw - 1200px) / 2)) - 1.75rem)))">
-  <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.5rem 2rem;font-size:.9375rem;line-height:1.4">
-    <a href="../" style="font-weight:700;white-space:nowrap">© 2026 red dot editions</a>
-    <a href="https://www.instagram.com/reddoteditions/" target="_blank" rel="noopener noreferrer" style="font-weight:700">@reddoteditions</a>
+<footer data-tone="light" style="background:#ffffff;color:#d6001a;border-top:1px solid #d6001a;display:flex;align-items:center;min-height:2.75rem;padding:.45rem max(clamp(1.25rem,3vw,2.4rem),clamp(1.25rem,calc((100vw - 999px) * 100),max(13rem,calc((100vw - 1200px) / 2))));padding-left:max(clamp(1.25rem,3vw,2.4rem),clamp(1.25rem,calc((100vw - 999px) * 100),calc(max(13rem,calc((100vw - 1200px) / 2)) - 1.75rem)))">
+  <div style="flex:1 1 auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.5rem 2rem;font-size:.9375rem;line-height:1.4">
+    <a href="../" style="font-weight:500;white-space:nowrap">© 2026 red dot editions</a>
+    <a href="https://www.instagram.com/reddoteditions/" target="_blank" rel="noopener noreferrer" style="font-weight:500">@reddoteditions</a>
   </div>
 </footer>
 </x-dc>
@@ -108,11 +116,11 @@ class Component extends DCLogic {
   renderVals() {
     const intl = "envio internacional";
     const regions = [
-      { kind: "envio nacional", name: "Brasil", url: "https://buy.stripe.com/28E9AU8ybfQt4TV7Ff4Ja01", target: "_blank" },
-      { kind: intl, name: "América do Norte, Central e Caribe", url: "https://buy.stripe.com/cNi00kbKn7jX723aRr4Ja02", target: "_blank" },
-      { kind: intl, name: "América do Sul", url: "https://buy.stripe.com/aFa6oI9Cf7jXfyzgbL4Ja03", target: "_blank" },
-      { kind: intl, name: "Europa", url: "https://buy.stripe.com/7sYbJ229N8o1fyz5x74Ja04", target: "_blank" },
-      { kind: intl, name: "Ásia, África e Oceania", url: "https://buy.stripe.com/9B6dRa6q31ZD0DF6Bb4Ja05", target: "_blank" }
+      { kind: "envio nacional", name: "Brasil", ship: "frete: R$\u00a025", url: "https://buy.stripe.com/28E9AU8ybfQt4TV7Ff4Ja01", target: "_blank" },
+      { kind: intl, name: "América do Norte e Central", ship: "frete: R$\u00a0290", url: "https://buy.stripe.com/cNi00kbKn7jX723aRr4Ja02", target: "_blank" },
+      { kind: intl, name: "América do Sul", ship: "frete: R$\u00a0240", url: "https://buy.stripe.com/aFa6oI9Cf7jXfyzgbL4Ja03", target: "_blank" },
+      { kind: intl, name: "Europa", ship: "frete: R$\u00a0310", url: "https://buy.stripe.com/7sYbJ229N8o1fyz5x74Ja04", target: "_blank" },
+      { kind: intl, name: "Ásia, África e Oceania", ship: "frete: R$\u00a0400", url: "https://buy.stripe.com/9B6dRa6q31ZD0DF6Bb4Ja05", target: "_blank" }
     ];
     return { regions };
   }

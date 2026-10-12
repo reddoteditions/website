@@ -46,6 +46,7 @@
       const r = sec.getBoundingClientRect();
       if (r.top <= innerHeight * .4 && r.bottom > innerHeight * .4) active = sec.id === "ficha" ? "edicao" : sec.id;
     });
+    if (innerHeight + scrollY >= document.documentElement.scrollHeight - 4) { const l = [...document.querySelectorAll("section[id]")].pop(); if (l) active = l.id; }
     navs.forEach(nav => {
       nav.style.position = wide ? "fixed" : "absolute";
       nav.querySelectorAll("[data-nav-key]").forEach(a => {
@@ -86,7 +87,7 @@
       const b = document.createElement("div");
       b.setAttribute("data-mnav", "");
       if (layer === "base") b.setAttribute("aria-hidden", "true");
-      b.style.cssText = `position:fixed;top:0;left:0;right:0;z-index:40;display:flex;justify-content:space-between;align-items:center;min-height:2.75rem;padding:.45rem ${pad};${font};line-height:1.4;background:#d6001a;color:#ffffff`;
+      b.style.cssText = `position:fixed;top:0;left:0;right:0;z-index:40;display:flex;justify-content:space-between;align-items:center;min-height:2.75rem;padding:.45rem ${pad};${font};line-height:1.4;background:#ffffff;color:#d6001a;border-bottom:1px solid #d6001a`;
       const l = document.createElement(layer === "base" ? "span" : "a");
       l.textContent = "red dot editions"; l.style.cssText = "font-weight:700;white-space:nowrap";
       if (layer !== "base") l.href = home.getAttribute("href");
@@ -99,7 +100,7 @@
     const sheet = document.createElement("div");
     sheet.id = "rde-mnav-sheet"; sheet.setAttribute("data-mnav", ""); sheet.setAttribute("data-mnav-sheet", "");
     sheet.setAttribute("role", "dialog"); sheet.setAttribute("aria-modal", "true"); sheet.setAttribute("aria-label", "Menu");
-    sheet.style.cssText = `position:fixed;inset:0;z-index:2147483500;background:#d6001a;color:#ffffff;display:flex;flex-direction:column;padding:0 ${pad} ${pad};${font};transform:translateY(-100%);visibility:hidden;transition:transform .6s cubic-bezier(.76,0,.24,1),visibility 0s linear .6s`;
+    sheet.style.cssText = `position:fixed;top:0;left:0;right:0;bottom:-120px;z-index:2147483500;background:#d6001a;color:#ffffff;display:flex;flex-direction:column;padding:0 ${pad} calc(${pad} + 120px);${font};transform:translateY(-100%);visibility:hidden;transition:transform .6s cubic-bezier(.76,0,.24,1),visibility 0s linear .6s`;
     const head = document.createElement("div");
     head.style.cssText = "display:flex;justify-content:space-between;align-items:center;min-height:2.75rem;padding:.45rem 0;line-height:1.4";
     const hl = document.createElement("a"); hl.textContent = "red dot editions"; hl.href = home.getAttribute("href"); hl.style.cssText = "font-weight:700;white-space:nowrap;color:inherit";

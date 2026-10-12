@@ -72,7 +72,7 @@ class RdeMetaballs extends HTMLElement {
     const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
     let raf = 0, inView = true, start = performance.now();
     const lite = matchMedia("(max-width: 768px), (pointer: coarse)").matches || (navigator.connection && navigator.connection.saveData);
-    const limit = lite ? 8000 : Infinity;
+    const limit = lite ? 30000 : Infinity;
     let elapsed = 0, last = null;
     const size = () => {
       const r = c.getBoundingClientRect(), d = Math.min(devicePixelRatio || 1, 2);
